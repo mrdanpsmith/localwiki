@@ -1,7 +1,7 @@
 (function($) {
 	var main = $('#main');
 	function loadFromHash() {
-		var filename = location.hash.replace(/#(.*)/,'$1.txt');
+		var filename = 'content/' + location.hash.replace(/#(.*)/,'$1.txt');
 		$.ajax(filename,{
 			dataType: 'text'
 		}).done(function(data) {
