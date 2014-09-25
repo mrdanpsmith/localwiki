@@ -22,9 +22,12 @@
 		loadFromHash();
 	});
 	main.on('click','a',function(event) {
-		event.preventDefault();
-		event.stopImmediatePropagation();
-		$.hash($(this).attr('href'));
+		var href = $(this).attr('href');
+		if (href.indexOf('http') != 0) {
+			$.hash($(this).attr('href'));
+			event.preventDefault();
+			event.stopImmediatePropagation();
+		}
 	});
 	$.hash(location.hash ? location.hash : 'README.md');
 })(jQuery);
