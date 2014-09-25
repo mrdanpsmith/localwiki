@@ -1,5 +1,5 @@
 (function($) {
-	var errorFilename = 'error/error.txt';
+	var errorFilename = 'error.txt';
 	var main = $('#main');
 	function loadFile(filename,error) {
 		$.ajax(filename,{
