@@ -1,5 +1,5 @@
 (function($) {
-	var errorFilename = 'error.txt';
+	var errorFilename = 'ERROR.md';
 	var main = $('#main');
 	function loadFile(filename,error) {
 		$.ajax(filename,{
@@ -15,7 +15,7 @@
 		});
 	}
 	function loadFromHash() {
-		var filename = 'content/' + location.hash.replace(/#(.*)/,'$1.txt');
+		var filename = location.hash.replace(/#(.*)/,'$1');
 		loadFile(filename);
 	}
 	$(window).on('hashchange',function() {
@@ -26,5 +26,5 @@
 		event.stopImmediatePropagation();
 		$.hash($(this).attr('href'));
 	});
-	$.hash(location.hash ? location.hash : 'home');
+	$.hash(location.hash ? location.hash : 'README.md');
 })(jQuery);
