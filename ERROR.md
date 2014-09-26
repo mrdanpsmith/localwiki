@@ -1,3 +1,3 @@
 # Error
 
-Error loading the page "$error_filename".  Make sure the file exists!
+Error loading the page "$filename".  Make sure the file exists!

@@ -1,18 +1,33 @@
 (function($) {
-	var errorFilename = 'ERROR.md';
 	var main = $('#main');
-	function html(data) {
-		return marked(data);
+	function esc(str) {
+		return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 	}
-	function loadPage(filename,error) {
+	function regex(str) {
+		var expr = esc(config.expression.marker + str);
+		var flags = config.expression.ignorecase ? 'gi': 'g';
+		return new RegExp(expr,flags);
+	}
+	function merge(data,context) {
+		var merged = data;
+		if (context) {
+			$.each(context,function(key,value) {
+				var expression = config.expression.marker + key;
+				merged = merged.replace(regex(key),value);
+			});
+		}
+		return merged;
+	}
+	function html(markdown) {
+		return marked(markdown);
+	}
+	function loadPage(filename,context) {
 		$.ajax(filename,{
 			dataType: 'text'
 		}).done(function(data) {
-			main.html(error ? html(data.replace(/\$error_filename/g,error.filename)) : html(data));
+			main.html(html(merge(data,context)));
 		}).fail(function() {
-			if (!error) {
-				loadPage(errorFilename,{filename:filename});
-			}
+			loadPage(config.page.error,{filename:filename});
 		}).always(function() {
 			$('title').text('localwiki: ' + filename);
 		});
@@ -32,5 +47,9 @@
 			event.stopImmediatePropagation();
 		}
 	});
-	$.hash(location.hash ? location.hash : 'README.md');
+	if (location.hash) {
+		loadFromHash();
+	} else {
+		loadPage(config.page.home);
+	}
 })(jQuery);
