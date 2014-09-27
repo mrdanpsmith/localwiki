@@ -1,27 +1,43 @@
 (function($) {
 	localwiki = function(config) {
 		var main = $('#main');
+		var title = $('title');
+		attachHandlers();
 		if (location.hash) {
 			loadFromHash();
 		} else {
-			loadPage(config.page.home);
+			$.hash(config.page.home);
 		}
-		attachHandlers();
 
 		function loadFromHash() {
 			loadPage(location.hash.replace(/#(.*)/,'$1'));
 		}
 
-		function loadPage(filename,context) {
+		function loadErrorPage(filename,context) {
 			$.ajax(filename,{
 				dataType: 'text'
 			}).done(function(data) {
-				main.html(html(merge(data,context)));
+				updatePage(data,context);
 			}).fail(function() {
-				loadPage(config.page.error,{filename:filename});
-			}).always(function() {
-				$('title').text(config.title.prefix + filename);
+				$('#error-loading-error-page').fadeIn();
 			});
+		}
+
+		function loadPage(filename) {
+			$.ajax(filename,{
+				dataType: 'text'
+			}).done(function(data) {
+				updatePage(data,{filename: filename});
+			}).fail(function() {
+				loadErrorPage(config.page.error,{filename:filename});
+			});
+		}
+
+		function updatePage(data,context) {
+			main.hide();
+			main.html(html(merge(data,context)));
+			title.text(merge(config.title,context));
+			main.fadeIn();
 		}
 
 		function attachHandlers() {
@@ -30,7 +46,7 @@
 			});
 			main.on('click','a',function(event) {
 				var href = $(this).attr('href');
-				if (href.indexOf('http') != 0) {
+				if (href.indexOf('http') !== 0) {
 					$.hash(href);
 					event.preventDefault();
 					event.stopImmediatePropagation();
@@ -42,7 +58,6 @@
 			var merged = data;
 			if (context) {
 				$.each(context,function(key,value) {
-					var expression = config.expression.marker + key;
 					merged = merged.replace(regex(key),value);
 				});
 			}

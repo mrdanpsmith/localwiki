@@ -16,9 +16,13 @@
 	</head>
 	<body>
 		<div class="container theme-showcase" role="main" id="main">
-			<div class="error">
+			<div id="local-ajax-error" style="display: none;">
 				<h1>Ajax permissions error</h1>
-				<p>You are seeing this error because your browser is denying AJAX requests.  If you are using chrome launch it with the "--allow-files-to-access-files" command line option or serve localwiki from a webserver.</p>
+				<p>You are seeing this error because your browser is denying AJAX requests<span style="display: none;"> (or because you're viewing the source)</span>.  If you are using chrome launch it with the "--allow-files-to-access-files" command line option or serve localwiki from a webserver.</p>
+			</div>
+			<div id="error-loading-error-page" style="display: none;">
+				<h1>Error loading the error page</h1>
+				<p>You are seeing this error because there was an error loading the configured error page<span style="display: none;"> (or because you're viewing the source)</span>.  That may sound confusing, but the next step is to make sure the error page that is configured in your config.js is accessible.</p>
 			</div>
 		</div>
 		<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -26,6 +30,8 @@
 		<script src="scripts/lib/marked-0.3.2/lib/marked.js"></script>
 		<script src="scripts/config/config.js"></script>
 		<script src="scripts/hash.js"></script>
+		<script src="scripts/lat.js"></script>
 		<script src="scripts/localwiki.js"></script>
+		<script src="scripts/main.js"></script>
 	</body>
 </html>

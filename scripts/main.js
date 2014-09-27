@@ -1,12 +1,12 @@
 (function($) {
-	var error = $('#local-ajax-error');
+	var localAjaxError = $('#local-ajax-error');
 	$.fn.lat({
 		success: function() {
-			error.remove();
+			localAjaxError.remove();
 			localwiki(config);
 		},
 		fail: function() {
-			error.fadeIn();
+			localAjaxError.fadeIn();
 		}
 	});
 })(jQuery);

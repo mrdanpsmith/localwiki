@@ -4,7 +4,7 @@
 		if (location.protocol === 'file:') {
 			var scripts = document.getElementsByTagName("script"),
 				src = scripts[scripts.length-1].src;
-			$.ajax(src).done(config.success).fail(config.fail);
+			$.ajax(src,{dataType: 'text'}).done(config.success).fail(config.fail);
 		} else {
 			config.success.call(settings);
 		}

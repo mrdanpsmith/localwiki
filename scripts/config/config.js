@@ -6,5 +6,6 @@ config = {
 	expression: {
 		marker: '$',
 		ignorecase: false
-	}
+	},
+	title: 'localwiki: $filename'
 }
