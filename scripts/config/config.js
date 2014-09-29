@@ -1,11 +1,18 @@
 config = {
+	path: {
+		baseDir: '.',
+		errorDir: 'error'
+	},
 	page: {
 		home: 'README.md',
-		error: 'error/ERROR.md'
+		error: 'ERROR.md'
 	},
 	expression: {
 		marker: '$',
-		ignorecase: false
+		ignoreCase: false
 	},
-	title: 'localwiki: $filename'
+	parser: {
+		doNotHandleClass: 'do-not-override'
+	},
+	title: 'localwiki: $pageName'
 }
