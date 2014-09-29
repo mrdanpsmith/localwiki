@@ -4,14 +4,14 @@
 		var title = $('title');
 		var pathSeparator = '/';
 		attachHandlers();
-		if (location.hash) {
-			loadFromHash();
-		} else {
-			$.hash(config.page.home);
-		}
+		loadFromHash();
 
 		function loadFromHash() {
-			loadPage(hashAsPageName());
+			if (hashAsPageName() !== '') {
+				loadPage(hashAsPageName());
+			} else {
+				loadPage(config.page.home);
+			}
 		}
 
 		function loadErrorPage(pageName,context) {
@@ -69,7 +69,7 @@
 		}
 
 		function hashAsPageName() {
-			return location.hash.replace(/#(.*)/,'$1');
+			return location.hash ? location.hash.replace(/#(.*)/,'$1').trim() : '';
 		}
 
 		function merge(data,context) {
