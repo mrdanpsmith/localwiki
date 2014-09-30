@@ -5,7 +5,7 @@ config = {
 	},
 	page: {
 		home: 'README.md',
-		error: 'ERROR.md'
+		error: 'error.md'
 	},
 	expression: {
 		marker: '$',
