@@ -3,7 +3,11 @@
 	$.fn.lat({
 		success: function() {
 			localAjaxError.remove();
-			localwiki(config);
+			if (localwikiConfig != undefined) {
+				localwiki(localwikiConfig);
+			} else {
+				localwiki();
+			}
 		},
 		fail: function() {
 			localAjaxError.fadeIn();

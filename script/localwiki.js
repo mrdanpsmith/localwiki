@@ -1,12 +1,12 @@
 (function($) {
-	localwiki = function(config) {
+	localwiki = function(customConfig) {
+		var config = customConfig ? $.extend(true,{},localwiki.defaults,customConfig) : localwiki.defaults;
 		var main = $('#main');
 		var title = $('title');
-		var pathSeparator = '/';
 		attachHandlers();
-		loadFromHash();
+		loadCurrentPage();
 
-		function loadFromHash() {
+		function loadCurrentPage() {
 			if (hashAsPageName() !== '') {
 				loadPage(hashAsPageName());
 			} else {
@@ -14,35 +14,31 @@
 			}
 		}
 
-		function loadErrorPage(pageName,context) {
-			var filename = joinPaths(config.path.errorDir,pageName);
-			var dynamicProps = {
-				pageName: pageName,
-				filename: filename
+		function loadPage(pageName) {
+			var filename = util.joinPaths(config.path.baseDir,pageName);
+			var context = {
+				filename:filename,
+				pageName:pageName
 			};
-			context = context ? $.extend({},dynamicProps,context) : dynamicProps;
-			$.ajax(filename,{
-				dataType: 'text'
-			}).done(function(data) {
-				updatePage(data,context);
-			}).fail(function() {
+			ajaxUpdate(context.filename,context).fail(function() {
+				loadErrorPage(config.page.error,context);
+			});
+		}
+
+		function loadErrorPage(pageName,context) {
+			var filename = util.joinPaths(config.path.errorDir,pageName);
+			ajaxUpdate(filename,context).fail(function() {
 				$('#error-loading-error-page').fadeIn();
 			});
 		}
 
-		function loadPage(pageName,context) {
-			var filename = joinPaths(config.path.baseDir,pageName);
-			var dynamicProps = {
-				pageName: pageName,
-				filename: filename
-			};
-			context = context ? $.extend({},dynamicProps,context) : dynamicProps;
-			$.ajax(filename,{
+		function ajaxUpdate(filename,context) {
+			console.log(filename);
+			return $.ajax(filename,{
 				dataType: 'text'
 			}).done(function(data) {
+				console.log(data);
 				updatePage(data,context);
-			}).fail(function() {
-				loadErrorPage(config.page.error,context);
 			});
 		}
 
@@ -55,7 +51,7 @@
 
 		function attachHandlers() {
 			$(window).on('hashchange',function() {
-				loadFromHash();
+				loadCurrentPage();
 			});
 			main.on('click','a',function(event) {
 				var link = $(this);
@@ -83,10 +79,38 @@
 		}
 
 		function regex(str) {
-			var expr = esc(config.expression.marker + str);
+			var expr = util.esc(config.expression.marker + str);
 			var flags = config.expression.ignoreCase ? 'gi': 'g';
 			return new RegExp(expr,flags);
 		}
+
+		function html(markdown) {
+			return marked(markdown);
+		}
+
+	};
+
+	localwiki.defaults = {
+		path: {
+			baseDir: '.',
+			errorDir: 'error'
+		},
+		page: {
+			home: 'README.md',
+			error: 'error.md'
+		},
+		expression: {
+			marker: '$',
+			ignoreCase: false
+		},
+		parser: {
+			doNotHandleClass: 'do-not-override'
+		},
+		title: 'localwiki: $pageName'
+	};
+
+	util = (function() {
+		var pathSeparator = '/';
 
 		function joinPaths() {
 			var paths = arguments;
@@ -102,12 +126,13 @@
 			return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 		}
 
-		function html(markdown) {
-			return marked(markdown);
-		}
-
 		function stringHasEnding(str,suffix) {
 			return str.indexOf(suffix, str.length - suffix.length) !== -1;
 		}
-	};
+
+		return {
+			joinPaths: joinPaths,
+			esc: esc
+		};
+	})();
 })(jQuery);
