@@ -1,4 +1,4 @@
-localwikiConfig = {
+localwiki.customConfig = {
 //	path: {
 //		baseDir: '.',
 //		errorDir: 'error'
