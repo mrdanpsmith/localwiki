@@ -33,11 +33,9 @@
 		}
 
 		function ajaxUpdate(filename,context) {
-			console.log(filename);
 			return $.ajax(filename,{
 				dataType: 'text'
 			}).done(function(data) {
-				console.log(data);
 				updatePage(data,context);
 			});
 		}
