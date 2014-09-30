@@ -3,8 +3,8 @@
 	$.fn.lat({
 		success: function() {
 			localAjaxError.remove();
-			if (localwikiConfig != undefined) {
-				localwiki(localwikiConfig);
+			if (localwiki.customConfig != undefined) {
+				localwiki(localwiki.customConfig);
 			} else {
 				localwiki();
 			}

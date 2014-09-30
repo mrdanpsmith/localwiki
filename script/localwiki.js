@@ -1,6 +1,7 @@
 (function($) {
 	localwiki = function(customConfig) {
 		var config = customConfig ? $.extend(true,{},localwiki.defaults,customConfig) : localwiki.defaults;
+		var util = localwiki.util;
 		var main = $('#main');
 		var title = $('title');
 		attachHandlers();
