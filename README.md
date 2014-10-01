@@ -13,6 +13,9 @@ In order to change the configuration for this wiki, take a look at the example <
 ### google chrome ###
 Unforunately, Google Chrome does not by default allow local AJAX requests to take place from the filesystem.  This is an understandable security decision.  If you want to view pages stored on localwiki without using a server, launch Google Chrome using one of the launching scripts provided.  These scripts have been tested in Windows 7 and Ubuntu Linux.
 
+### firefox ###
+Firefox allows the above, but does not allow you to go higher in the filesystem than the current directory.  That means your wiki's base directory should be above the directory containing the index.html.
+
 ## links ##
 1) [Github](https://github.com/mrdanpsmith/localwiki)
 
