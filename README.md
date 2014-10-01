@@ -17,6 +17,5 @@ Unforunately, Google Chrome does not by default allow local AJAX requests to tak
 Firefox allows the above, but does not allow you to go higher in the filesystem than the current directory.  That means your wiki's base directory should be above the directory containing the index.html.
 
 ## links ##
-1) [Github](https://github.com/mrdanpsmith/localwiki)
-
-2) [MIT-Style License](LICENSE)
+1. [Github](https://github.com/mrdanpsmith/localwiki)
+2. [MIT-Style License](LICENSE)
