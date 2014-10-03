@@ -38,6 +38,7 @@
 				dataType: 'text'
 			}).done(function(data) {
 				updatePage(data,context);
+				window.scrollTo(0,0);
 			});
 		}
 
