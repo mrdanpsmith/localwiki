@@ -1,6 +1,5 @@
 (function($) {
-	localwiki = function(customConfig) {
-		var config = customConfig ? $.extend(true,{},localwiki.defaults,customConfig) : localwiki.defaults;
+	localwiki = function(config) {
 		var util = localwiki.util;
 		var main = $('#main');
 		var title = $('title');
@@ -89,24 +88,4 @@
 		}
 
 	};
-
-	localwiki.defaults = {
-		path: {
-			baseDir: '.',
-			errorDir: 'error'
-		},
-		page: {
-			home: 'README.md',
-			error: 'error.md'
-		},
-		expression: {
-			marker: '$',
-			ignoreCase: false
-		},
-		parser: {
-			doNotHandleClass: 'do-not-override'
-		},
-		title: 'localwiki: $pageName'
-	};
-
 })(jQuery);

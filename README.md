@@ -7,7 +7,7 @@ The goal of this project is to allow someone to create a local documentation sys
 The wiki uses [markdown syntax](http://daringfireball.net/projects/markdown/syntax) and local AJAX calls in order to chain together a locally working, minimally invasive wiki system.
 
 ## configuration ##
-In order to change the configuration for this wiki, take a look at the example <a class="do-not-override" href="config.js">config.js</a> file provided with the source.  If you want to store your configuration file outside of the localwiki home directory, simply make sure the file is loaded before the <a class="do-not-override" href="script/main.js">main.js</a> in the index.html.
+In order to change the configuration for this wiki, take a look at the example <a class="do-not-override" href="config.json">config.json</a> file provided with the source.  If you want to store your configuration file outside of the localwiki home directory, change the data-config-url attribute to a different URL in the index.html.
 
 ## notes ##
 ### google chrome ###

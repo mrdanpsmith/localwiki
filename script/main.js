@@ -3,11 +3,9 @@
 	$.fn.lat({
 		success: function() {
 			localAjaxError.remove();
-			if (localwiki.customConfig != undefined) {
-				localwiki(localwiki.customConfig);
-			} else {
-				localwiki();
-			}
+			$.getJSON($('[data-config-url]').attr('data-config-url'),function(config) {
+				localwiki(config);
+			});
 		},
 		fail: function() {
 			localAjaxError.fadeIn();

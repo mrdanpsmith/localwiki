@@ -37,7 +37,7 @@
 		<div class="container theme-showcase" role="main" id="main">
 			<div id="local-ajax-error" class="static-error">
 				<h1>Ajax permissions error</h1>
-				<p>You are seeing this error because your browser (most likely Google Chrome) is denying AJAX requests<span style="display: none;"> (or because you're viewing the source)</span>.  If you are using Chrome launch it with the "--allow-files-to-access-files" command line option, use a different browser, or serve localwiki from a webserver.</p>
+				<p>You are seeing this error because your browser (most likely Google Chrome) is denying AJAX requests<span style="display: none;"> (or because you're viewing the source)</span>.  If you are using Chrome launch it with the "--allow-files-to-access-files" command line option (a launch-chrome-wiki script for your platform should be available in this directory...be sure to close all Chrome browsers currently open before using it), use a different browser, or serve localwiki from a webserver.</p>
 			</div>
 			<div id="error-loading-error-page" class="static-error">
 				<h1>Error loading the error page</h1>
@@ -49,8 +49,7 @@
 		<script src="script/lib/marked-0.3.2/lib/marked.js"></script>
 		<script src="script/hash.js"></script>
 		<script src="script/lat.js"></script>
-		<script src="script/localwiki.js"></script>
-		<script src="config.js"></script>
+		<script src="script/localwiki.js" data-config-url="config.json"></script>
 		<script src="script/util.js"></script>
 		<script src="script/main.js"></script>
 	</body>
