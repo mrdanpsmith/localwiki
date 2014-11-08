@@ -55,12 +55,18 @@
 			main.on('click','a',function(event) {
 				var link = $(this);
 				var href = link.attr('href');
-				if (href.indexOf('http') !== 0 && !link.hasClass(config.parser.doNotHandleClass)) {
+				if (handled(href)) {
 					$.hash(href);
 					event.preventDefault();
 					event.stopImmediatePropagation();
+				} else {
+					link.attr('target','_new');
 				}
 			});
+		}
+
+		function handled(href) {
+			return href.indexOf('http') !== 0 && href.indexOf(config.page.ending) === href.length - config.page.ending.length;
 		}
 
 		function hashAsPageName() {

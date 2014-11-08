@@ -5,14 +5,12 @@
 	},
 	"page": {
 		"home": "README.md",
-		"error": "error.md"
+		"error": "error.md",
+		"ending": ".md"
 	},
 	"expression": {
 		"marker": "$",
 		"ignoreCase": false
-	},
-	"parser": {
-		"doNotHandleClass": "do-not-override"
 	},
 	"title": "localwiki: $pageName"
 }
